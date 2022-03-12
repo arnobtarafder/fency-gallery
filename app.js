@@ -25,6 +25,9 @@ const showImages = (images) => {
     div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
     gallery.appendChild(div)
   })
+  if(images.length == 0) {
+    alert("Sorry, no result/image found")
+  }
 
 }
 
@@ -85,6 +88,7 @@ const createSlider = () => {
     slideIndex++;
     changeSlide(slideIndex);
   }, duration);
+  // duration.value = "";
 }
 
 // change slider index 
@@ -119,8 +123,23 @@ searchBtn.addEventListener('click', function () {
   const search = document.getElementById('search');
   getImages(search.value)
   sliders.length = 0;
+  search.value = "";
 })
 
 sliderBtn.addEventListener('click', function () {
   createSlider()
 })
+document
+    .getElementById("search")
+    .addEventListener("keypress", function (event) {
+        if (event.key == "Enter") {
+            document.getElementById("search-btn").click();
+        }
+    });
+    document
+    .getElementById("duration")
+    .addEventListener("keypress", function (event) {
+        if (event.key == "Enter") {
+            document.getElementById("create-slider").click();
+        }
+    });
